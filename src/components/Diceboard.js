@@ -2,9 +2,9 @@ import React from 'react';
 import Dice from './Dice';
 import uniqid from 'uniqid';
 
-const Diceboard = ({dice}) => {
-    const diceBoard = dice.map((die) => {
-        return <Dice key={uniqid()} value={die}/>
+const Diceboard = ({dice, values}) => {
+    const diceBoard = dice.map((die, i) => {
+        return <Dice key={uniqid()} max={die} value={values[i]}/>
     });
 
     return (
