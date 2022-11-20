@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Dice = (value) => {
+const Dice = ({value}) => {
     return (
       <div className={`d${value}`}>{value}</div>  
     );
