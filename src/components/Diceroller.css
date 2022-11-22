@@ -1,0 +1,87 @@
+#diceroller{
+    background-color: #e3e3e3;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+#side{
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+#main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#options{
+    display: flex;
+    gap: 1em;
+}
+
+
+#save {
+  appearance: none;
+  background-color: green;
+  border: 1px solid green;
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#save:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+#save:hover {
+  background-color: #19913b;
+}
+
+#save:focus {
+  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  outline: none;
+}
+
+#roll {
+    appearance: none;
+    background-color: #455d7a;
+    border: 1px solid #455d7a;
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  #roll:focus:not(:focus-visible):not(.focus-visible) {
+    box-shadow: none;
+    outline: none;
+  }
+  
+  #roll:hover {
+    background-color: #526d8f;
+  }
+  
+  #roll:focus {
+    box-shadow: rgba(46, 107, 164, 0.4) 0 0 0 3px;
+    outline: none;
+  }

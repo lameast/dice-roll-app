@@ -4,6 +4,7 @@ import TotalRoll from './TotalRoll';
 import DiceAdder from './DiceAdder';
 import CombinationList from './CombinationList';
 import getRandomInt from '../utils';
+import './Diceroller.css'
 
 const Diceroller = () => {
     const [dice, setDice] = useState([6]);
@@ -37,7 +38,7 @@ const Diceroller = () => {
     };
 
     const onLoadClick = (e) => {
-        const loadedDice = e.target.parentNode.firstChild.dataset.value;
+        const loadedDice = e.target.parentNode.parentNode.firstChild.dataset.value;
         const loadedDiceArr = loadedDice.split("+").map((num) => {
             return parseInt(num);
         });
@@ -48,12 +49,12 @@ const Diceroller = () => {
     }
 
     const onDeleteClick = (e) => {
-        const toDelete = e.target.parentNode.firstChild.dataset.value;
+        const toDelete = e.target.parentNode.parentNode.firstChild.dataset.value;
         const toDeleteArr = toDelete.split("+").map((num) => {
             return parseInt(num);
         });
         const newCombs = combinations.filter((comb) => comb.toString() !== toDeleteArr.toString())
-        console.log(newCombs);
+        setCombinations(newCombs);
     };
 
     const onSaveClick = (e) => {
@@ -65,7 +66,7 @@ const Diceroller = () => {
     };
 
     return (
-        <div>
+        <div id='diceroller'>
             <div id='side'>
                 <CombinationList combinations={combinations} onLoadClick={onLoadClick} onDeleteClick={onDeleteClick}/>
             </div>
@@ -73,8 +74,10 @@ const Diceroller = () => {
                 <DiceAdder onAddClick={onAddClick}/>
                 <Diceboard dice={dice} values={diceRolls}/>
                 <TotalRoll total={total}/>
-                <button onClick={onRollClick}>Roll</button>
-                <button onClick={onSaveClick}>Save</button>
+                <div id='options'>
+                    <button id='roll' onClick={onRollClick}>Roll</button>
+                    <button id='save' onClick={onSaveClick}>Save</button>
+                </div>
             </div>
         </div>
     );

@@ -1,0 +1,8 @@
+#diceadder{
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    width: 80vw;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}

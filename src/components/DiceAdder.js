@@ -1,4 +1,5 @@
 import React from 'react';
+import './DiceAdder.css'
 
 const DiceAdder = ({onAddClick}) => {
     const diceNumbers = [4, 6, 8, 10, 12, 20];
@@ -7,7 +8,7 @@ const DiceAdder = ({onAddClick}) => {
     });
 
     return (
-        <div>
+        <div id='diceadder'>
             {addButtons}
         </div>
     );

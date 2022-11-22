@@ -1,4 +1,5 @@
 import React from "react";
+import './Combination.css';
 
 const Combination = ({dice, onLoadClick, onDeleteClick}) => {
     const diceCounts = {};
@@ -15,8 +16,10 @@ const Combination = ({dice, onLoadClick, onDeleteClick}) => {
     return (
         <div className='combination'>
             <span data-value={diceStr}>{comb}</span>
-            <button className='load' onClick={onLoadClick}>Load</button>
-            <button className="delete" onClick={onDeleteClick}>Delete</button>
+            <div id="loadAndDelete">
+                <button id='load' onClick={onLoadClick}>Load</button>
+                <button id="delete" onClick={onDeleteClick}>Delete</button>
+            </div>
         </div>
     );
 };

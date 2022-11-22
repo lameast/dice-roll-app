@@ -1,6 +1,7 @@
 import React from 'react';
 import Dice from './Dice';
 import uniqid from 'uniqid';
+import './Diceboard.css';
 
 const Diceboard = ({dice, values}) => {
     const diceBoard = dice.map((die, i) => {

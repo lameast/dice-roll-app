@@ -1,0 +1,17 @@
+#header{
+    display: flex;
+    background-color: #233142;
+    justify-content: space-around;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    align-items: center;
+    color:white
+}
+
+#appTitle{
+    font-size: 2em;
+}
+
+#help{
+    font-size: 1.5em;
+}

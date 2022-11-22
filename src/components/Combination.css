@@ -1,0 +1,64 @@
+.combination{
+    display: flex;
+    gap: 1em;
+    padding: 0.5em;
+}
+
+#loadAndDelete{
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+}
+
+#load {
+  background-color: #037926;
+  border: 1px solid transparent;
+  border-radius: .75rem;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1rem;
+  padding: .4rem 0.75rem;
+  text-align: center;
+  width: auto;
+}
+
+#load:hover {
+  background-color: #1b8b17;
+}
+
+#load:focus {
+  box-shadow: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+#delete {
+    background-color: #af0000;
+    border: 1px solid transparent;
+    border-radius: .75rem;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    flex: 0 0 auto;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1rem;
+    padding: .4rem .75rem;
+    text-align: center;
+    width: auto;
+  }
+  
+  #delete:hover {
+    background-color: #e62a2a;
+  }
+  
+  #delete:focus {
+    box-shadow: none;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
