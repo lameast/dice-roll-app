@@ -2,6 +2,8 @@
     display: flex;
     gap: 1em;
     padding: 0.5em;
+    border: 1px solid black;
+    justify-content: space-between;
 }
 
 #loadAndDelete{

@@ -65,6 +65,12 @@ const Diceroller = () => {
         }
     };
 
+    const onResetClick = (e) => {
+        setDice([]);
+        setDiceRolls([]);
+        setTotal(0);
+    }
+
     return (
         <div id='diceroller'>
             <div id='side'>
@@ -77,6 +83,7 @@ const Diceroller = () => {
                 <div id='options'>
                     <button id='roll' onClick={onRollClick}>Roll</button>
                     <button id='save' onClick={onSaveClick}>Save</button>
+                    <button id='reset' onClick={onResetClick}>Reset</button>
                 </div>
             </div>
         </div>
