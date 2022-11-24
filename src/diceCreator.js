@@ -51,7 +51,8 @@ const createDice = (sides) => {
             console.log('Not a valid dice');
             break;
         case 4:
-            geometry = <tetrahedronGeometry  args={[0.7,0]} />;
+            geometry = <tetrahedronGeometry  args={[1,0]} />;
+            console.log(geometry);
             break;
         case 6:
             geometry = <boxGeometry  args={[1,1,1]} />;

@@ -2,21 +2,24 @@ import React, {useState, useEffect} from 'react';
 import Diceboard from './Diceboard';
 import TotalRoll from './TotalRoll';
 import DiceAdder from './DiceAdder';
+import Dice from './Dice';
 import CombinationList from './CombinationList';
 import getRandomInt from '../utils';
+import uniqid from 'uniqid';
 import './Diceroller.css'
 
 const Diceroller = () => {
-    const [dice, setDice] = useState([6]);
-    const [diceRolls, setDiceRolls] = useState([1]);
+    const [dice, setDice] = useState([]);
+    const [diceRolls, setDiceRolls] = useState([]);
     const [total, setTotal] = useState(1);
     const [combinations, setCombinations] = useState([]);
 
+    /*
     useEffect(() => {
         setTotal(total);
         setDiceRolls(diceRolls);
     }, [total, diceRolls]);
-
+    */
     const rollDice = (dice) => {
         return dice.map((die) => {
             return getRandomInt(die);
@@ -30,9 +33,12 @@ const Diceroller = () => {
     };
 
     const onAddClick = (e) => {
-        const newDice = parseInt(e.target.textContent.slice(1));
+        const newNum = parseInt(e.target.textContent.slice(1));
+        const newDiceRoll = getRandomInt(newNum);
+        const x = (dice.length)%8;
+        const y = Math.floor((dice.length)/8);
+        const newDice = <Dice key={uniqid()} max={newNum} value={newDiceRoll} position={[-8 + 2*x, 5 - 2*y,0]}/>
         setDice(dice => [...dice, newDice]);
-        const newDiceRoll = getRandomInt(newDice);
         setDiceRolls(diceRolls => [...diceRolls, newDiceRoll]);
         setTotal(total + newDiceRoll);
     };

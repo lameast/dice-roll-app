@@ -6,12 +6,12 @@ import { Canvas } from '@react-three/fiber';
 
 const Diceboard = ({dice, values}) => {
     //max 6 dice per row
+    /*
     const diceBoard = dice.map((die, i) => {
         let row = Math.floor(i/6);
         let xPosition = i%6;
         return <Dice key={uniqid()} max={die} value={values[i]} position={[-6 + 2*xPosition,2*row,0]}/>
     });
-    /*
     return (
         <div id='diceboard'>
             {diceBoard}
@@ -23,10 +23,9 @@ const Diceboard = ({dice, values}) => {
             <ambientLight intensity={0.1} />
             <directionalLight color="red" position={[0, 0, 5]} />
             <mesh>
-                {diceBoard}
-                <meshStandardMaterial />
+                {dice}
             </mesh>
-            {diceBoard}
+            {dice}
         </Canvas>
     );
 };
