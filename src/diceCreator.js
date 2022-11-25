@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 
 const D10Geometry = () => {
     // Sourced from https://github.com/byWulf/threejs-dice/blob/master/lib/dice.js#L499
+    // Creates the geometry for a ten sided dice
     const sides = 10
     const radius = 0.7
     const vertices = [
@@ -43,22 +44,22 @@ const D10Geometry = () => {
     return pentagonalTrapezohedronGeometry;
 }
 
-const createDice = (sides) => {
-    console.log(sides);
+const createDice = (faces) => {
+    //Return the correct geometry depending on the number of faces
     let geometry;
-    switch(sides){
+    switch(faces){
         default:
             console.log('Not a valid dice');
             break;
         case 4:
-            geometry = <tetrahedronGeometry  args={[1,0]} />;
+            geometry = <tetrahedronGeometry  args={[0.9,0]} />;
             console.log(geometry);
             break;
         case 6:
             geometry = <boxGeometry  args={[1,1,1]} />;
             break;
         case 8:
-            geometry = <octahedronGeometry  args={[0.7,0]} />;
+            geometry = <octahedronGeometry  args={[0.8,0]} />;
             break;
         case 10:
             geometry = D10Geometry();

@@ -5,6 +5,7 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader.js';
 import * as THREE from 'three';
 import uniqid from 'uniqid';
 import { Vector3 } from 'three';
+
 /*
 const Dice = ({value, max}) => {
   return (
@@ -14,20 +15,23 @@ const Dice = ({value, max}) => {
 */
 
 function Dice(props) {
-  const mesh = useRef();
+
+  const mesh = useRef({newRotation: new THREE.Euler()});
   const images = [];
+  //Get textures for faces of the dice
   for(let i = 1; i <= props.max; i++){
     images.push(require(`./dicetextures/${i}.png`));
   }
+
   const texture = useLoader(TextureLoader, images);
   const meshTextures =  texture.map((tex, idx) => {
     return <meshStandardMaterial key={uniqid()} map={tex} attach={`material-${idx}`} />
   });
-  console.log(meshTextures);
-  console.log(props.max, props.value);
+
   let geometry = createDice(props.max);
   useLayoutEffect(() => {
-    console.log(mesh.current.geometry);
+    //Determine UV mapping for textures onto faces of dice
+    //Also compute the rotation required to display the face of the rolled dice value
     if(mesh.current.geometry.groups.length === 0){
       switch(props.max){
         default:
@@ -38,11 +42,11 @@ function Dice(props) {
             mesh.current.geometry.addGroup(3*i, 3, i);
           }
           const based4 = new THREE.Vector2(0, 0.5);
-          const centerd4 = new THREE.Vector2(0.5,0.5);
+          const centerd4 = new THREE.Vector2();
           let baseUVsd4 = [
-            based4.clone().rotateAround(centerd4, THREE.MathUtils.degToRad(0)),
-            based4.clone().rotateAround(centerd4, THREE.MathUtils.degToRad(120)),
-            based4.clone().rotateAround(centerd4, THREE.MathUtils.degToRad(240))
+            based4.clone().rotateAround(centerd4, THREE.MathUtils.degToRad(0)).addScalar(0.5,0.5),
+            based4.clone().rotateAround(centerd4, THREE.MathUtils.degToRad(120)).addScalar(0.5,0.5),
+            based4.clone().rotateAround(centerd4, THREE.MathUtils.degToRad(240)).addScalar(0.5,0.5)
           ];
           let uvsd4 = [];
           for (let i = 0; i < 4; i++){
@@ -53,7 +57,19 @@ function Dice(props) {
             );
           }
           mesh.current.geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvsd4, 2));
-          
+          const normd4 = mesh.current.geometry.getAttribute('normal');
+          const vectord4 = new Vector3();
+          vectord4.fromBufferAttribute(normd4, (props.value-1)*3);
+
+          const camerad4 = new Vector3(0,0,1);
+          const rotationAngled4 = vectord4.angleTo(camerad4);
+          vectord4.cross(camerad4).normalize();
+          const quaterniond4 = new THREE.Quaternion();
+          quaterniond4.copy(mesh.current.quaternion);
+          quaterniond4.setFromAxisAngle(vectord4, rotationAngled4);
+          const eulerd4 = new THREE.Euler();
+          eulerd4.setFromQuaternion(quaterniond4);
+          mesh.current.newRotation = eulerd4;
           break;
         case 8:
           for(let i = 0; i < props.max; i++){
@@ -63,11 +79,11 @@ function Dice(props) {
             mesh.current.geometry.addGroup(3*i, 3, i);
           }
           const based8 = new THREE.Vector2(0, 0.5);
-          const centerd8 = new THREE.Vector2(0.5,0.5);
+          const centerd8 = new THREE.Vector2();
           let baseUVsd8 = [
-            based8.clone().rotateAround(centerd8, THREE.MathUtils.degToRad(0)),
-            based8.clone().rotateAround(centerd8, THREE.MathUtils.degToRad(120)),
-            based8.clone().rotateAround(centerd8, THREE.MathUtils.degToRad(240))
+            based8.clone().rotateAround(centerd8, THREE.MathUtils.degToRad(0)).addScalar(0.5,0.5),
+            based8.clone().rotateAround(centerd8, THREE.MathUtils.degToRad(120)).addScalar(0.5,0.5),
+            based8.clone().rotateAround(centerd8, THREE.MathUtils.degToRad(240)).addScalar(0.5,0.5)
           ];
           let uvsd8 = [];
           for (let i = 0; i < 8; i++){
@@ -78,7 +94,19 @@ function Dice(props) {
             );
           }
           mesh.current.geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvsd8, 2));
-          
+          const normd8 = mesh.current.geometry.getAttribute('normal');
+          const vectord8 = new Vector3();
+          vectord8.fromBufferAttribute(normd8, (props.value-1)*3);
+
+          const camerad8 = new Vector3(0,0,1);
+          const rotationAngled8 = vectord8.angleTo(camerad8);
+          vectord8.cross(camerad8).normalize();
+          const quaterniond8 = new THREE.Quaternion();
+          quaterniond8.copy(mesh.current.quaternion);
+          quaterniond8.setFromAxisAngle(vectord8, rotationAngled8);
+          const eulerd8 = new THREE.Euler();
+          eulerd8.setFromQuaternion(quaterniond8);
+          mesh.current.newRotation = eulerd8;
           break;
         case 10:
           for(let i = 0; i < props.max; i++){
@@ -118,7 +146,19 @@ function Dice(props) {
             );
           }
           mesh.current.geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvsd10, 2));
-          mesh.current.geometry.computeVertexNormals();
+          const normd10 = mesh.current.geometry.getAttribute('normal');
+          const vectord10 = new Vector3();
+          vectord10.fromBufferAttribute(normd10, (props.value-1)*6);
+
+          const camerad10 = new Vector3(0,0,1);
+          const rotationAngled10 = vectord10.angleTo(camerad10);
+          vectord10.cross(camerad10).normalize();
+          const quaterniond10 = new THREE.Quaternion();
+          quaterniond10.copy(mesh.current.quaternion);
+          quaterniond10.setFromAxisAngle(vectord10, rotationAngled10);
+          const eulerd10 = new THREE.Euler();
+          eulerd10.setFromQuaternion(quaterniond10);
+          mesh.current.newRotation = eulerd10;
           break;
         case 12:
           for(let i = 0; i < props.max; i++){
@@ -152,6 +192,19 @@ function Dice(props) {
             );
           }
           mesh.current.geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+          const normd12 = mesh.current.geometry.getAttribute('normal');
+          const vectord12 = new Vector3();
+          vectord12.fromBufferAttribute(normd12, (props.value-1)*9);
+
+          const camerad12 = new Vector3(0,0,1);
+          const rotationAngled12 = vectord12.angleTo(camerad12);
+          vectord12.cross(camerad12).normalize();
+          const quaterniond12 = new THREE.Quaternion();
+          quaterniond12.copy(mesh.current.quaternion);
+          quaterniond12.setFromAxisAngle(vectord12, rotationAngled12);
+          const eulerd12 = new THREE.Euler();
+          eulerd12.setFromQuaternion(quaterniond12);
+          mesh.current.newRotation = eulerd12;
           break;
         case 20:
           for(let i = 0; i < props.max; i++){
@@ -161,11 +214,11 @@ function Dice(props) {
             mesh.current.geometry.addGroup(3*i, 3, i);
           }
           const based20 = new THREE.Vector2(0, 0.5);
-          const centerd20 = new THREE.Vector2(0.5,0.5);
+          const centerd20 = new THREE.Vector2();
           let baseUVsd20 = [
-            based20.clone().rotateAround(centerd20, THREE.MathUtils.degToRad(0)),
-            based20.clone().rotateAround(centerd20, THREE.MathUtils.degToRad(120)),
-            based20.clone().rotateAround(centerd20, THREE.MathUtils.degToRad(240))
+            based20.clone().rotateAround(centerd20, THREE.MathUtils.degToRad(0)).addScalar(0.5,0.5),
+            based20.clone().rotateAround(centerd20, THREE.MathUtils.degToRad(120)).addScalar(0.5,0.5),
+            based20.clone().rotateAround(centerd20, THREE.MathUtils.degToRad(240)).addScalar(0.5,0.5)
           ];
           let uvsd20 = [];
           for (let i = 0; i < 20; i++){
@@ -176,24 +229,82 @@ function Dice(props) {
             );
           }
           mesh.current.geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvsd20, 2));
+
+          /*Rotate normal vector of desired face of dice to the camera*/
+          const normd20 = mesh.current.geometry.getAttribute('normal');
+          const vectord20 = new Vector3();
+          vectord20.fromBufferAttribute(normd20, (props.value-1)*3);
+
+          const camerad20 = new Vector3(0,0,1);
+          const rotationAngled20 = vectord20.angleTo(camerad20);
+          vectord20.cross(camerad20).normalize();
+          const quaternion = new THREE.Quaternion();
+          quaternion.copy(mesh.current.quaternion);
+          quaternion.setFromAxisAngle(vectord20, rotationAngled20);
+          const euler = new THREE.Euler();
+          euler.setFromQuaternion(quaternion);
+          mesh.current.newRotation = euler;
       }
       
     }
-    const norm = mesh.current.geometry.getAttribute('normal');
-    const vector = new Vector3();
-    vector.fromBufferAttribute(norm, 0);
-    console.log(vector);
-    mesh.current.geometry.lookAt(vector.multiplyScalar(-1));
+    if(props.max === 6){
+      const normd6 = mesh.current.geometry.getAttribute('normal');
+      const vectord6 = new Vector3();
+      if(props.value === 6){
+        vectord6.fromBufferAttribute(normd6, (props.value-2)*4);
+      }else if (props.value === 5){
+        vectord6.fromBufferAttribute(normd6, (props.value)*4);
+      }else{
+        vectord6.fromBufferAttribute(normd6, (props.value-1)*4);
+      }
+
+
+      const camerad6 = new Vector3(0,0,1);
+      const rotationAngled6 = vectord6.angleTo(camerad6);
+      vectord6.cross(camerad6).normalize();
+      const quaterniond6 = new THREE.Quaternion();
+      quaterniond6.copy(mesh.current.quaternion);
+      quaterniond6.setFromAxisAngle(vectord6, rotationAngled6);
+      const eulerd6 = new THREE.Euler();
+      eulerd6.setFromQuaternion(quaterniond6);
+      mesh.current.newRotation = eulerd6;
+    }
+   
+  }, [props.value, props.max]);
+
+  useFrame((state, delta) => {
+    //console.log(mesh.current.rotation.y);
+    if(mesh.current.rotation.y > Math.PI+0.02){
+      mesh.current.rotation.y -= (Math.PI*2+0.02);
+    }
+    if(!(mesh.current.rotation.y <= mesh.current.newRotation.y+0.03 && mesh.current.rotation.y >= mesh.current.newRotation.y))
+    mesh.current.rotation.y += 0.02
   });
-  useFrame((state, delta) => (mesh.current.rotation.y += 0.01))
-  useFrame((state, delta) => (mesh.current.rotation.x += 0.01))
+
+  useFrame((state, delta) => {
+    //console.log(mesh.current.rotation.x);
+    //console.log(mesh.current.newRotation.x);
+    if(mesh.current.rotation.x > Math.PI+0.02){
+      mesh.current.rotation.x -= (Math.PI*2+0.02);
+    }
+    if(!(mesh.current.rotation.x <= mesh.current.newRotation.x+0.03 && mesh.current.rotation.x >= mesh.current.newRotation.x))
+    mesh.current.rotation.x += 0.02
+  });
+  useFrame((state, delta) => {
+    //console.log(mesh.current.rotation.z);
+    //console.log(mesh.current.newRotation.z);
+    if(mesh.current.rotation.z > Math.PI+0.02){
+      mesh.current.rotation.z -= (Math.PI*2+0.02);
+    }
+    if(!(mesh.current.rotation.z <= mesh.current.newRotation.z+0.03 && mesh.current.rotation.z >= mesh.current.newRotation.z))
+    mesh.current.rotation.z += 0.02
+  });
 
   return (
     <mesh
       {...props}
-      ref={mesh}>
+      ref={mesh} >
       {geometry}
-      
       {meshTextures}
     </mesh>
   )

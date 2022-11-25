@@ -20,8 +20,8 @@ const Diceboard = ({dice, values}) => {
     */
     return (
         <Canvas id='diceboard' orthographic camera={{zoom:50, position: [0,0,100], left: -5, right: 5, top: 5, bottom: -5}}>
-            <ambientLight intensity={0.1} />
-            <directionalLight color="red" position={[0, 0, 5]} />
+            <ambientLight intensity={0.8} />
+            <directionalLight color="white" position={[0, 0, 5]} />
             <mesh>
                 {dice}
             </mesh>
