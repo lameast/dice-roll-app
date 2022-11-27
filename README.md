@@ -21,4 +21,5 @@ Installs all dependencies required. The required dependencies can be viewed in t
 # Dice Roller App
 ![Dice Roller App](./public/diceroller.PNG)
 
-An app for rolling the usual dice found in tabletop games. Dice combinations can be saved and loaded.
+An app for rolling the usual dice found in tabletop games. Dice combinations can be saved and loaded.\
+A live demo can be found at [https://lameast.github.io/dice-roll-app/](https://lameast.github.io/dice-roll-app/).
