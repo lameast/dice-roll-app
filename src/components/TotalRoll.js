@@ -1,4 +1,5 @@
 import React from "react";
+import './TotalRoll.css';
 
 const TotalRoll = ({total}) => {
     return (

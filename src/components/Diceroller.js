@@ -1,17 +1,24 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Diceboard from './Diceboard';
 import TotalRoll from './TotalRoll';
 import DiceAdder from './DiceAdder';
 import Dice from './Dice';
 import CombinationList from './CombinationList';
+import MaximumDice from './MaximumDice';
+import Saved from './Saved';
+import SaveNone from './SaveNone';
 import {getRandomInt, isArrayInArray} from '../utils';
 import uniqid from 'uniqid';
 import './Diceroller.css'
 
 const Diceroller = () => {
+    const MAXIMUM = 48;
     const [dice, setDice] = useState([]);
     const [total, setTotal] = useState(0);
     const [combinations, setCombinations] = useState([]);
+    const [overMax, setOverMax] = useState(false);
+    const [alreadySaved, setAlreadySaved] = useState(false);
+    const [saveNone, setSaveNone] = useState(false);
 
     const rollDice = (dice) => {
         return dice.map((die) => {
@@ -31,13 +38,17 @@ const Diceroller = () => {
 
     //Add a dice to the board
     const onAddClick = (e) => {
-        const newNum = parseInt(e.target.textContent.slice(1));
-        const newDiceRoll = getRandomInt(newNum);
-        const x = (dice.length)%8;
-        const y = Math.floor((dice.length)/8);
-        const newDice = <Dice key={uniqid()} max={newNum} value={newDiceRoll} position={[-8 + 2*x, 5 - 2*y,0]}/>
-        setDice(dice => [...dice, newDice]);
-        setTotal(total + newDiceRoll);
+        if(dice.length < MAXIMUM){
+            const newNum = parseInt(e.target.textContent.slice(1));
+            const newDiceRoll = getRandomInt(newNum);
+            const x = (dice.length)%8;
+            const y = Math.floor((dice.length)/8);
+            const newDice = <Dice key={uniqid()} max={newNum} value={newDiceRoll} position={[-8 + 2*x, 5 - 2*y,0]}/>
+            setDice(dice => [...dice, newDice]);
+            setTotal(total + newDiceRoll);
+        }else{
+            setOverMax(true);
+        }
     };
 
     //Load saved dice
@@ -70,16 +81,17 @@ const Diceroller = () => {
 
     //Save current dice combination
     const onSaveClick = (e) => {
-        console.log(combinations);
-        const savedDice = dice.map((die) => {
-            return die.props.max;
-        });
-        console.log(savedDice);
-        console.log(combinations.includes(savedDice));
-        if(!isArrayInArray(combinations,savedDice)){
-            setCombinations(combinations => [...combinations, savedDice]);
+        if(dice.length > 0){
+            const savedDice = dice.map((die) => {
+                return die.props.max;
+            });
+            if(!isArrayInArray(combinations,savedDice)){
+                setCombinations(combinations => [...combinations, savedDice]);
+            }else{
+                setAlreadySaved(true);
+            }
         }else{
-            alert("Combination already saved.");
+            setSaveNone(true);
         }
     };
 
@@ -105,6 +117,9 @@ const Diceroller = () => {
                     <button id='reset' onClick={onResetClick}>Reset</button>
                 </div>
             </div>
+            <MaximumDice trigger={overMax} setTrigger={setOverMax}/>
+            <Saved trigger={alreadySaved} setTrigger={setAlreadySaved}/>
+            <SaveNone trigger={saveNone} setTrigger={setSaveNone}/>
         </div>
     );
 };
