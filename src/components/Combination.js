@@ -9,9 +9,13 @@ const Combination = ({dice, onLoadClick, onDeleteClick}) => {
         diceCounts[num] = diceCounts[num] ? diceCounts[num] + 1 : 1;
     }
 
-    const comb = Object.keys(diceCounts).reduce((previous, key) => {
-        return `${previous} + ${diceCounts[key]}d${key}`
-    });
+    let comb = '';
+    for(const key in diceCounts){
+        comb += ` + ${diceCounts[key]}d${key}`;
+    }
+
+
+    comb = comb.slice(2);
 
     return (
         <div className='combination'>
