@@ -2,15 +2,19 @@
     display: flex;
     gap: 1em;
     padding: 0.5em;
+    border: 1px solid rgb(189, 206, 221);
+    border-radius: 0.5em;
+    justify-content: space-between;
+    background-color: rgb(189, 206, 221);
 }
 
-#loadAndDelete{
+.loadAndDelete{
     display: flex;
     flex-direction: column;
     gap: 0.25em;
 }
 
-#load {
+.load {
   background-color: #037926;
   border: 1px solid transparent;
   border-radius: .75rem;
@@ -26,17 +30,17 @@
   width: auto;
 }
 
-#load:hover {
+.load:hover {
   background-color: #1b8b17;
 }
 
-#load:focus {
+.load:focus {
   box-shadow: none;
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
 
-#delete {
+.delete {
     background-color: #af0000;
     border: 1px solid transparent;
     border-radius: .75rem;
@@ -52,13 +56,18 @@
     width: auto;
   }
   
-  #delete:hover {
-    background-color: #e62a2a;
-  }
+.delete:hover {
+  background-color: #e62a2a;
+}
+
+.delete:focus {
+  box-shadow: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
   
-  #delete:focus {
-    box-shadow: none;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
-  
+.combStr{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -6,3 +6,35 @@
     padding-top: 1em;
     padding-bottom: 1em;
 }
+
+.add {
+    appearance: none;
+    background-color: #b9610e;
+    border: 1px solid #b9610e;
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .add:focus:not(:focus-visible):not(.focus-visible) {
+    box-shadow: none;
+    outline: none;
+  }
+  
+  .add:hover {
+    background-color: #da7920;
+  }
+  
+  .add:focus {
+    box-shadow: #b9610e 0 0 0 3px;
+    outline: none;
+  }

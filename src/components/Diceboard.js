@@ -1,17 +1,17 @@
 import React from 'react';
-import Dice from './Dice';
-import uniqid from 'uniqid';
 import './Diceboard.css';
+import { Canvas } from '@react-three/fiber';
 
-const Diceboard = ({dice, values}) => {
-    const diceBoard = dice.map((die, i) => {
-        return <Dice key={uniqid()} max={die} value={values[i]}/>
-    });
-
+const Diceboard = ({dice}) => {
     return (
-        <div id='diceboard'>
-            {diceBoard}
-        </div>
+        <Canvas id='diceboard' orthographic camera={{zoom:50, position: [0,0,100], left: -5, right: 5, top: 5, bottom: -5}}>
+            <ambientLight intensity={0.8} />
+            <directionalLight color="white" position={[0, 0, 5]} />
+            <mesh>
+                {dice}
+            </mesh>
+            {dice}
+        </Canvas>
     );
 };
 

@@ -1,0 +1,13 @@
+.combinationList{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+#noCombinations{
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    font-style: italic;
+}
